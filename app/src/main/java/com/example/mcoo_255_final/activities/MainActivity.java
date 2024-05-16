@@ -80,6 +80,11 @@ public class MainActivity extends AppCompatActivity {
                 mRandomNumber.setFromTo(Integer.parseInt(from_input), Integer.parseInt(to_input));
                 int currRandomNumber = mRandomNumber.getCurrentRandomNumber();
                 mNumberHistory.add(currRandomNumber);
+
+                SharedPreferences.Editor editor = getDefaultSharedPreferences(MainActivity.this).edit();
+                editor.putString("history", Utils.getJSONStringFromNumberList(mNumberHistory));
+                editor.apply(); // Use apply() for asynchronous commit
+
                 tv_result_text.setText(String.valueOf(currRandomNumber));
             }
         });
